@@ -4,7 +4,223 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fun with Shapes | 2D Shapes</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --dark: #292F36;
+            --light: #F7FFF7;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            background-color: var(--secondary);
+            display: flex;
+            justify-content: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        nav a.active {
+            background-color: var(--accent);
+            color: var(--dark);
+        }
+
+        nav a:hover {
+            background-color: var(--accent);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1, h2 {
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .shapes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .shape-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            height: 250px;
+        }
+
+        .shape-container:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .shape {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .shape-name {
+            font-weight: bold;
+            font-size: 1.2rem;
+            min-height: 1.5rem;
+            text-align: center;
+            color: var(--dark);
+        }
+
+        /* 2D Shapes */
+        .circle {
+            background-color: var(--primary);
+            border-radius: 50%;
+        }
+
+        .square {
+            background-color: var(--secondary);
+        }
+
+        .rectangle {
+            background-color: var(--accent);
+            width: 140px;
+            height: 80px;
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 120px solid var(--primary);
+            background-color: transparent;
+        }
+
+        .pentagon {
+            width: 120px;
+            height: 120px;
+            background-color: var(--secondary);
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+        }
+
+        .hexagon {
+            width: 120px;
+            height: 104px;
+            background-color: var(--accent);
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+        }
+
+        .star {
+            width: 120px;
+            height: 120px;
+            background-color: var(--primary);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+
+        .oval {
+            width: 140px;
+            height: 80px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .pop {
+            animation: pop 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .shapes-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .shape-container {
+                padding: 1rem;
+                height: 200px;
+            }
+            
+            .shape {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .rectangle {
+                width: 100px;
+                height: 60px;
+            }
+            
+            .oval {
+                width: 100px;
+                height: 60px;
+            }
+            
+            .triangle {
+                border-left: 40px solid transparent;
+                border-right: 40px solid transparent;
+                border-bottom: 80px solid var(--primary);
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -67,6 +283,19 @@
         <p>&copy; 2025 Fun with Shapes | A Delightful Shape Explorer</p>
     </footer>
 
-    <script src="scripts.js"></script>
+    <script>
+        function showShapeName(container, name) {
+            const shapeElement = container.querySelector('.shape');
+            const nameElement = container.querySelector('.shape-name');
+            
+            // Add pop animation
+            shapeElement.classList.remove('pop');
+            void shapeElement.offsetWidth; // Trigger reflow
+            shapeElement.classList.add('pop');
+            
+            // Display the name
+            nameElement.textContent = name;
+        }
+    </script>
 </body>
 </html>
