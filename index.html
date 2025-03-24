@@ -11,6 +11,12 @@
             --accent: #FFE66D;
             --dark: #292F36;
             --light: #F7FFF7;
+            --purple: #7209B7;
+            --orange: #FF9F1C;
+            --teal: #2EC4B6;
+            --green: #06D6A0;
+            --pink: #EF476F;
+            --blue: #118AB2;
         }
         
         * {
@@ -107,6 +113,9 @@
             height: 120px;
             margin-bottom: 1.5rem;
             transition: all 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .shape-name {
@@ -117,57 +126,110 @@
             color: var(--dark);
         }
 
-        /* 2D Shapes */
+        /* 2D Shapes with improved colors and gradients */
         .circle {
-            background-color: var(--primary);
+            background: radial-gradient(circle at 30% 30%, #ff8c8c, var(--primary));
             border-radius: 50%;
         }
 
         .square {
-            background-color: var(--secondary);
+            background: linear-gradient(135deg, var(--purple), #9d4edd);
         }
 
         .rectangle {
-            background-color: var(--accent);
+            background: linear-gradient(135deg, var(--blue), #64dfdf);
             width: 140px;
             height: 80px;
         }
 
+        /* Fixed triangle using clip-path */
         .triangle {
-            width: 0;
-            height: 0;
-            border-left: 60px solid transparent;
-            border-right: 60px solid transparent;
-            border-bottom: 120px solid var(--primary);
-            background-color: transparent;
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(to top, var(--teal), #5afff3);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
 
         .pentagon {
             width: 120px;
             height: 120px;
-            background-color: var(--secondary);
+            background: linear-gradient(135deg, var(--orange), #ffd166);
             clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
         }
 
         .hexagon {
             width: 120px;
             height: 104px;
-            background-color: var(--accent);
+            background: linear-gradient(135deg, var(--green), #8eeddf);
             clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
         }
 
         .star {
             width: 120px;
             height: 120px;
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--pink), #ff8fab);
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
         }
 
         .oval {
             width: 140px;
             height: 80px;
-            background-color: var(--secondary);
+            background: linear-gradient(135deg, var(--accent), #fff7ab);
             border-radius: 50%;
+        }
+
+        .trapezoid {
+            width: 120px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--blue), #72efdd);
+            clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+        }
+
+        .parallelogram {
+            width: 120px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--purple), #c77dff);
+            transform: skew(-20deg);
+        }
+
+        .diamond {
+            width: 80px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary), #ffadad);
+            transform: rotate(45deg);
+        }
+
+        /* Heart shape using pseudo-elements (fallback approach) */
+        .heart {
+            width: 120px;
+            height: 110px;
+            background: linear-gradient(135deg, var(--pink), #ff8fab);
+            position: relative;
+            margin-top: 10px;
+            background: transparent;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 60px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--pink), #ff8fab);
+            border-radius: 60px 60px 0 0;
+        }
+
+        .heart::before {
+            left: 60px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
         }
 
         footer {
@@ -184,8 +246,18 @@
             100% { transform: scale(1); }
         }
 
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px var(--accent); }
+            100% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
+        }
+
         .pop {
             animation: pop 0.3s ease;
+        }
+
+        .glow {
+            animation: glow 1.5s ease infinite;
         }
 
         @media (max-width: 768px) {
@@ -214,10 +286,15 @@
                 height: 60px;
             }
             
-            .triangle {
-                border-left: 40px solid transparent;
-                border-right: 40px solid transparent;
-                border-bottom: 80px solid var(--primary);
+            /* Adjust heart for mobile */
+            .heart::before,
+            .heart::after {
+                width: 40px;
+                height: 60px;
+            }
+            
+            .heart::before {
+                left: 40px;
             }
         }
     </style>
@@ -276,6 +353,26 @@
                 <div class="shape oval"></div>
                 <div class="shape-name"></div>
             </div>
+            
+            <div class="shape-container" onclick="showShapeName(this, 'Trapezoid')">
+                <div class="shape trapezoid"></div>
+                <div class="shape-name"></div>
+            </div>
+            
+            <div class="shape-container" onclick="showShapeName(this, 'Parallelogram')">
+                <div class="shape parallelogram"></div>
+                <div class="shape-name"></div>
+            </div>
+            
+            <div class="shape-container" onclick="showShapeName(this, 'Diamond')">
+                <div class="shape diamond"></div>
+                <div class="shape-name"></div>
+            </div>
+            
+            <div class="shape-container" onclick="showShapeName(this, 'Heart')">
+                <div class="shape heart"></div>
+                <div class="shape-name"></div>
+            </div>
         </div>
     </main>
     
@@ -292,6 +389,9 @@
             shapeElement.classList.remove('pop');
             void shapeElement.offsetWidth; // Trigger reflow
             shapeElement.classList.add('pop');
+            
+            // Toggle glow effect
+            shapeElement.classList.toggle('glow');
             
             // Display the name
             nameElement.textContent = name;
