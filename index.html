@@ -6,6 +6,7 @@
     <title>Fun with Shapes | 2D Shapes</title>
     <style>
         :root {
+            /* Light mode colors */
             --primary: #FF6B6B;
             --secondary: #4ECDC4;
             --accent: #FFE66D;
@@ -17,6 +18,27 @@
             --green: #06D6A0;
             --pink: #EF476F;
             --blue: #118AB2;
+            --card-bg: white;
+            --footer-text: white;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            :root {
+                /* Dark mode vaporwave neon colors */
+                --primary: #FF00FF; /* neon magenta */
+                --secondary: #00FFFF; /* neon cyan */
+                --accent: #FFFF00; /* neon yellow */
+                --dark: #FFFFFF; /* white text */
+                --light: #121212; /* dark background */
+                --purple: #B14AED; /* bright purple */
+                --orange: #FF9E00; /* neon orange */
+                --teal: #01FFC3; /* bright mint */
+                --green: #0FFF50; /* neon green */
+                --pink: #FF71CE; /* hot pink */
+                --blue: #01CDFE; /* bright blue */
+                --card-bg: #1E1E1E; /* dark card background */
+                --footer-text: #FFFFFF; /* white footer text */
+            }
         }
         
         * {
@@ -32,6 +54,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         header {
@@ -40,12 +63,14 @@
             padding: 1.5rem;
             text-align: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
         }
 
         nav {
             background-color: var(--secondary);
             display: flex;
             justify-content: center;
+            transition: background-color 0.3s;
         }
 
         nav a {
@@ -97,15 +122,27 @@
             cursor: pointer;
             transition: all 0.3s;
             padding: 1.5rem;
-            background-color: white;
+            background-color: var(--card-bg);
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             height: 250px;
         }
 
+        @media (prefers-color-scheme: dark) {
+            .shape-container {
+                box-shadow: 0 4px 15px rgba(255, 255, 255, 0.07);
+            }
+        }
+
         .shape-container:hover {
             transform: translateY(-8px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .shape-container:hover {
+                box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
+            }
         }
 
         .shape {
@@ -142,7 +179,6 @@
             height: 80px;
         }
 
-        /* Fixed triangle using clip-path */
         .triangle {
             width: 120px;
             height: 120px;
@@ -199,14 +235,12 @@
             transform: rotate(45deg);
         }
 
-        /* Heart shape using pseudo-elements (fallback approach) */
         .heart {
             width: 120px;
             height: 110px;
-            background: linear-gradient(135deg, var(--pink), #ff8fab);
+            background: transparent;
             position: relative;
             margin-top: 10px;
-            background: transparent;
         }
 
         .heart::before,
@@ -234,10 +268,11 @@
 
         footer {
             background-color: var(--dark);
-            color: white;
+            color: var(--footer-text);
             text-align: center;
             padding: 1rem;
             margin-top: 2rem;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         @keyframes pop {
@@ -250,6 +285,14 @@
             0% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
             50% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px var(--accent); }
             100% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            @keyframes glow {
+                0% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); }
+                50% { box-shadow: 0 0 20px var(--accent), 0 0 30px var(--primary); }
+                100% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); }
+            }
         }
 
         .pop {
@@ -286,7 +329,6 @@
                 height: 60px;
             }
             
-            /* Adjust heart for mobile */
             .heart::before,
             .heart::after {
                 width: 40px;
