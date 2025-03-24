@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun with Shapes | 3D Shapes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Fun with Shapes</h1>
+    </header>
+    
+    <nav>
+        <a href="index.html">2D Shapes</a>
+        <a href="3d-shapes.html" class="active">3D Shapes</a>
+    </nav>
+    
+    <main>
+        <h2>3D Shapes Gallery</h2>
+        <p>Click on any shape to see its name and watch it rotate! Explore these three-dimensional wonders.</p>
+        
+        <div class="shapes-grid">
+            <div class="shape-container" data-shape="Cube">
+                <div class="shape-3d-container">
+                    <div class="shape-3d cube">
+                        <div class="cube-face front"></div>
+                        <div class="cube-face back"></div>
+                        <div class="cube-face left"></div>
+                        <div class="cube-face right"></div>
+                        <div class="cube-face top"></div>
+                        <div class="cube-face bottom"></div>
+                    </div>
+                </div>
+                <div class="shape-name"></div>
+            </div>
+            
+            <div class="shape-container" data-shape="Pyramid">
+                <div class="shape-3d-container">
+                    <div class="shape-3d pyramid">
+                        <div class="pyramid-face front"></div>
+                        <div class="pyramid-face right"></div>
+                        <div class="pyramid-face back"></div>
+                        <div class="pyramid-face left"></div>
+                    </div>
+                </div>
+                <div class="shape-name"></div>
+            </div>
+            
+            <div class="shape-container" data-shape="Cylinder">
+                <div class="shape-3d-container">
+                    <div class="shape-3d cylinder-container">
+                        <div class="cylinder">
+                            <div class="cylinder-face top"></div>
+                            <div class="cylinder-face bottom"></div>
+                            <div class="cylinder-face side"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="shape-name"></div>
+            </div>
+            
+            <div class="shape-container" data-shape="Triangular Prism">
+                <div class="shape-3d-container">
+                    <div class="shape-3d prism-container">
+                        <div class="prism">
+                            <div class="prism-face top"></div>
+                            <div class="prism-face bottom"></div>
+                            <div class="prism-face side1"></div>
+                            <div class="prism-face side2"></div>
+                            <div class="prism-face side3"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="shape-name"></div>
+            </div>
+            
+            <div class="shape-container" data-shape="Sphere">
+                <div class="shape-3d-container">
+                    <div class="shape-3d">
+                        <div class="sphere"></div>
+                    </div>
+                </div>
+                <div class="shape-name"></div>
+            </div>
+            
+            <div class="shape-container" data-shape="Cone">
+                <div class="shape-3d-container">
+                    <div class="shape-3d cone-container">
+                        <div class="cone">
+                            <div class="cone-face bottom"></div>
+                            <div class="cone-face side"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="shape-name"></div>
+            </div>
+            
+            <div class="shape-container" data-shape="Octahedron">
+                <div class="shape-3d-container">
+                    <div class="shape-3d octahedron-container">
+                        <div class="octahedron">
+                            <div class="octahedron-face face1"></div>
+                            <div class="octahedron-face face2"></div>
+                            <div class="octahedron-face face3"></div>
+                            <div class="octahedron-face face4"></div>
+                            <div class="octahedron-face face5"></div>
+                            <div class="octahedron-face face6"></div>
+                            <div class="octahedron-face face7"></div>
+                            <div class="octahedron-face face8"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="shape-name"></div>
+            </div>
+            
+            <div class="shape-container" data-shape="Dodecahedron">
+                <div class="shape-3d-container">
+                    <div class="shape-3d">
+                        <!-- This is a simplified version, not a true dodecahedron -->
+                        <div class="sphere" style="background-color: var(--tertiary-color);"></div>
+                    </div>
+                </div>
+                <div class="shape-name"></div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 Fun with Shapes | A Delightful Shape Explorer</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
