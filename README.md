@@ -34,7 +34,7 @@ Perfect for:
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/vibecodemama/shapes.git
+git clone https://github.com/raisingpixels/shapes.git
 ```
 
 2. Open `index.html` in your browser
